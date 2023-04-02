@@ -1,4 +1,6 @@
-import { Checkbox, Form, Input, List } from 'antd';
+import { List } from 'antd';
+
+import SearchForm from '../components/SearchForm';
 
 const tips = [
   '全文搜索，模糊搜索，简繁同搜，拼音，同音字。',
@@ -8,16 +10,12 @@ const tips = [
   '如需添加收录，给我发消息 TG: @yzqzss / Email: yzqzss@othing.xyz',
 ];
 
+// FIXME: 垂直居中
+// TODO: 头图
 const Home = () => {
   return (
     <div className="flex justify-center items-center h-5/6 flex-col gap-3">
-      <Form
-        layout="inline"
-        className="w-full items-center gap-4 justify-center sm:flex-nowrap"
-      >
-        <Input.Search size="large" enterButton placeholder="请输入关键字" />
-        <Checkbox className="sm:w-32">展开全文</Checkbox>
-      </Form>
+      <SearchForm />
       <List
         dataSource={tips}
         bordered
