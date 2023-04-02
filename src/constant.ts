@@ -4,4 +4,4 @@ export const SEARCH_PARAMS = {
   PAGE: 'p',
 } as const;
 
-export const PRIMARY_COLOR = '#28303d';
+export const PRIMARY_COLOR = '#1677ff';
