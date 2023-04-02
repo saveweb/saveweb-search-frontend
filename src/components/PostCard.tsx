@@ -1,4 +1,8 @@
-import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CalendarOutlined,
+  EditOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { Card, Tag } from 'antd';
 import dayjs from 'dayjs';
 
@@ -22,6 +26,9 @@ const PostCard = ({ post }: { post: Post }) => {
           )}
           <Tag icon={<CalendarOutlined />} color={PRIMARY_COLOR}>
             {dayjs.unix(Number(post.date)).format('YYYY/MM/DD HH:mm:ss')}
+          </Tag>
+          <Tag icon={<EditOutlined />} color={PRIMARY_COLOR}>
+            约 {post.content_length} 字
           </Tag>
         </div>
         <div className="break-words">{post.content}</div>

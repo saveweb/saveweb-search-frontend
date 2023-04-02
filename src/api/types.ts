@@ -15,6 +15,7 @@ export type Post = {
   date: string;
   link: string;
   tags: string;
+  content_length: number;
   // id_feed: string;
   // lastSeen: string;
 };
