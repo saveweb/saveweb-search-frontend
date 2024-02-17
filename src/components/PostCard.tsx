@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 import type { Post } from '../api/types';
 import { PRIMARY_COLOR } from '../constant';
 
+// TODO: 不知道咋把 post.author.slice(1) 插进 HTML，暂时把 span 去掉
 const PostCard = ({ post }: { post: Post }) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -18,13 +19,23 @@ const PostCard = ({ post }: { post: Post }) => {
     <Card
       title={<div dangerouslySetInnerHTML={{ __html: post.title }} />}
       className="w-full"
-      extra={<a href={post.link}>查看原文</a>}
+      extra={
+        <>
+          <a
+            href={`https://box.othing.xyz/i/?a=reader&search=e:${post.id}&ajax=1`}
+            style={{ marginRight: '10px' }}
+          >
+            查看快照
+          </a>
+          <a href={post.link}>查看原文</a>
+        </>
+      }
     >
       <div className="space-y-3">
         <div>
           {post.author && (
             <Tag icon={<UserOutlined />} color={PRIMARY_COLOR}>
-              {post.author.slice(1)}
+              {post.author.slice(1).replace(/<\/?span[^>]*>/g, '')}
             </Tag>
           )}
           <Tag icon={<CalendarOutlined />} color={PRIMARY_COLOR}>
