@@ -5,15 +5,18 @@ import {
 } from '@ant-design/icons';
 import { Card, Tag } from 'antd';
 import dayjs from 'dayjs';
+import { useLocation } from 'react-router-dom';
 
 import type { Post } from '../api/types';
 import { PRIMARY_COLOR } from '../constant';
 
-// TODO: 关键字高亮
 const PostCard = ({ post }: { post: Post }) => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const fullTextFlag = params.get('f') === 'true';
   return (
     <Card
-      title={post.title}
+      title={<div dangerouslySetInnerHTML={{ __html: post.title }} />}
       className="w-full"
       extra={<a href={post.link}>查看原文</a>}
     >
@@ -31,14 +34,23 @@ const PostCard = ({ post }: { post: Post }) => {
             约 {post.content_length} 字
           </Tag>
         </div>
-        <div className="break-words">{post.content}</div>
+        <div
+          className="break-words"
+          dangerouslySetInnerHTML={{
+            __html: fullTextFlag
+              ? post.content.replace(/\n{3,}/g, '\n\n').replace(/\n/g, '<br>')
+              : post.content,
+          }}
+        ></div>
         {post.tags && (
           <div className="flex flex-wrap gap-1">
             {post.tags
               .slice(1)
               .split(' #')
               .map((tag, index) => (
-                <Tag key={index}>#{tag}</Tag>
+                <Tag key={index}>
+                  {<div dangerouslySetInnerHTML={{ __html: '#' + tag }} />}
+                </Tag>
               ))}
           </div>
         )}
