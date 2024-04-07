@@ -19,7 +19,7 @@ const SearchForm = ({
       layout="inline"
       className="w-full items-center gap-4 justify-center sm:flex-nowrap"
       onFinish={(data) => {
-        navigate(`/search?q=${data.keyword}&f=${data.showFull}&p=0`);
+        navigate(`/search?q=${encodeURIComponent(data.keyword || '')}&f=${data.showFull}&p=0`);
       }}
     >
       <Form.Item
