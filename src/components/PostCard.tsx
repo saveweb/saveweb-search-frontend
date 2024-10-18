@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Card, Tag } from 'antd';
 import dayjs from 'dayjs';
+import { marked } from 'marked';
 import { useLocation } from 'react-router-dom';
 
 import type { Post } from '../api/types';
@@ -15,6 +16,12 @@ const PostCard = ({ post }: { post: Post }) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const fullTextFlag = params.get('f') === 'true';
+  const htmlSummary = marked.parse(post.content.replace(/\n{3,}/g, '\n\n'));
+  const summary = htmlSummary
+    .replace(/<[^>]*>/g, '')
+    .replace(/:::|{.*}|{.*/g, '');
+  // TODO: 全文输出解析字体问题
+  post.content = fullTextFlag ? post.content : summary;
   return (
     <Card
       title={<div dangerouslySetInnerHTML={{ __html: post.title }} />}
@@ -48,9 +55,7 @@ const PostCard = ({ post }: { post: Post }) => {
         <div
           className="break-words"
           dangerouslySetInnerHTML={{
-            __html: fullTextFlag
-              ? post.content.replace(/\n{3,}/g, '\n\n').replace(/\n/g, '<br>')
-              : post.content,
+            __html: post.content,
           }}
         ></div>
         {post.tags && (
