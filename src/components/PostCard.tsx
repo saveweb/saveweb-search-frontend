@@ -18,6 +18,7 @@ const PostCard = ({ post }: { post: Post }) => {
   const fullTextFlag = params.get('f') === 'true';
   const htmlSummary = marked.parse(post.content.replace(/\n{3,}/g, '\n\n'));
   const summary = htmlSummary
+    .toString()
     .replace(/<[^>]*>/g, '')
     .replace(/:::|{.*}|{.*/g, '');
   // TODO: 全文输出解析字体问题
