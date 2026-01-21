@@ -25,6 +25,7 @@ const router = createBrowserRouter([
             q: url.searchParams.get(SEARCH_PARAMS.KEYWORD)!,
             f: url.searchParams.get(SEARCH_PARAMS.SHOW_FULL) === 'true',
             p: Number(url.searchParams.get(SEARCH_PARAMS.PAGE)),
+            b: url.searchParams.get(SEARCH_PARAMS.BEFORE_2023) === 'true',
           };
           return await getSearch(searchParams);
         },

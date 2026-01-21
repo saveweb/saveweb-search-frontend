@@ -5,6 +5,8 @@ export type SearchReq = {
   f: boolean;
   // 页数
   p: number;
+  // 2023年前
+  b?: boolean;
 };
 
 export type Post = {

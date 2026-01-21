@@ -31,6 +31,7 @@ const Search = () => {
         initialData={{
           keyword: searchParams.get(SEARCH_PARAMS.KEYWORD)!,
           showFull: searchParams.get(SEARCH_PARAMS.SHOW_FULL) === 'true',
+          before2023: searchParams.get(SEARCH_PARAMS.BEFORE_2023) === 'true',
         }}
       />
       <div className="text-sm">约 {searchRes.estimatedTotalHits} 条结果</div>
